@@ -1,0 +1,25 @@
+# Nuxt dev/build outputs
+
+.nuxt
+.nitro
+.cache
+
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+
+
+*.yarn/cache
+yarn.lock
+ .output
