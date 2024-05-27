@@ -42,5 +42,6 @@ next-env.d.ts
 .vscode
 .contentlayer
 .yarn
+.next
 *.yarn/cache
 *.next/cache
