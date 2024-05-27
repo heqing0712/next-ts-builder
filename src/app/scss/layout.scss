@@ -1,0 +1,21 @@
+body{
+    background: var(--builder-canvasBackground-color, #eeeeee);
+}
+
+
+.header{
+    height:60px;
+    background: #111;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    border-bottom: 1px solid #252525;
+}
+.main {
+    position:fixed;
+    top:60px;
+    left:0;
+    right:0;
+    bottom:0;
+}

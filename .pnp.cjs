@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.38"],\
             ["react", "npm:18.3.1"],\
             ["react-dom", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:18.3.1"],\
+            ["react-resizable-panels", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19"],\
             ["sass", "npm:1.77.2"],\
             ["tailwind-merge", "npm:2.3.0"],\
             ["tailwindcss", "npm:3.4.3"],\
@@ -3427,6 +3428,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.38"],\
             ["react", "npm:18.3.1"],\
             ["react-dom", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:18.3.1"],\
+            ["react-resizable-panels", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19"],\
             ["sass", "npm:1.77.2"],\
             ["tailwind-merge", "npm:2.3.0"],\
             ["tailwindcss", "npm:3.4.3"],\
@@ -3996,6 +3998,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
           "packageDependencies": [\
             ["react-is", "npm:16.13.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-resizable-panels", [\
+        ["npm:2.0.19", {\
+          "packageLocation": "./.yarn/cache/react-resizable-panels-npm-2.0.19-33ecf8f909-d09e07bf25.zip/node_modules/react-resizable-panels/",\
+          "packageDependencies": [\
+            ["react-resizable-panels", "npm:2.0.19"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19", {\
+          "packageLocation": "./.yarn/__virtual__/react-resizable-panels-virtual-3097846d61/0/cache/react-resizable-panels-npm-2.0.19-33ecf8f909-d09e07bf25.zip/node_modules/react-resizable-panels/",\
+          "packageDependencies": [\
+            ["react-resizable-panels", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19"],\
+            ["@types/react", "npm:18.3.3"],\
+            ["@types/react-dom", "npm:18.3.0"],\
+            ["react", "npm:18.3.1"],\
+            ["react-dom", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:18.3.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
