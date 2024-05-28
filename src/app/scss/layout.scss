@@ -3,6 +3,7 @@ body{
 }
 
 
+
 .header{
     height:60px;
     background: #111;
@@ -11,6 +12,7 @@ body{
     left:0;
     right:0;
     border-bottom: 1px solid #252525;
+
 }
 .main {
     position:fixed;
@@ -18,4 +20,7 @@ body{
     left:0;
     right:0;
     bottom:0;
+}
+.builder-container{
+    position: relative;
 }

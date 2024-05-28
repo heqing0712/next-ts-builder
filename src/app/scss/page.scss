@@ -1,9 +1,41 @@
-.builder-sidebar,
-.builder-setting{
-    background-color: var(--panel-bg-color);
-    min-width:300px;
-    max-width: 320px;
+.main{
+
 }
-.builder-main{
+.panel-left,
+.panel-right{
+   background-color: var(--panel-bg-color);
+   position: relative;
+   z-index: 1;
+   flex: 12 1 0px;
+   min-width: 260px;
+   max-width: 320px;
+ 
+}
+.panel-center{
     background-color: transparent;
+}
+.panel-left{
+   
+}
+.builder-container,
+.builder-main{
+    position:absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom:0;
+}
+
+.builder-panel{
+    background-color: var(--panel-bg-color);
+   width:300px;
+   height:100%;
+   position: absolute;
+   z-index: 1;
+}
+.builder-sidebar{
+    left:0;
+}
+.builder-menu{
+    right:0;
 }

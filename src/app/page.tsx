@@ -3,28 +3,52 @@
 import "./scss/page.scss";
 import { Panel, PanelGroup, PanelResizeHandle } from "@/components/layout/base-resizable";
 import React, { useLayoutEffect, useState } from "react";
-
+import { MapInteractionCSS } from "react-map-interaction";
 export default function Home() {
-  const defaultWidth = 300
-  const [defaultSize, setDefaultSize] = useState(11.2)
-
- 
- 
-
+    
+  // autoSaveId="persistence" 
   return (
-    <PanelGroup direction="horizontal"  id="group" >
-    <Panel className="builder-sidebar" defaultSize={defaultSize}  minSize={defaultSize}   >
-     
+
+    <div className="builder-container">
+      {/* <PanelGroup direction="horizontal" className="panel-container"    >
+    <Panel className="panel-left" defaultSize={12}>
     </Panel>
     <PanelResizeHandle />
-    <Panel className="builder-main" >
- 
+    <Panel className="panel-center" >
     </Panel>
     <PanelResizeHandle />
- 
-    <Panel class="builder-setting"   defaultSize={defaultSize}  minSize={defaultSize} >
- 
+    <Panel className="panel-right"  defaultSize={12}   >
     </Panel>
-  </PanelGroup>
+  </PanelGroup> */}
+      
+             <div className="builder-sidebar builder-panel"></div>
+             <div className="builder-main"  >
+          
+          <MapInteractionCSS
+        showControls
+        defaultValue={{
+          scale: 1,
+          translation: { x: 0, y: 20 }
+        }}
+        minScale={0.5}
+        maxScale={5}
+        translationBounds={{
+          xMax: 10000,
+          yMax:10000
+        }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          alt="test"
+          width="100%"
+        />
+            </MapInteractionCSS>
+            
+  
+      </div>
+      
+      <div className="builder-menu builder-panel"></div>
+    </div>
+    
   );
 }
