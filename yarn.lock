@@ -2771,6 +2771,7 @@ __metadata:
     postcss: ^8
     react: ^18
     react-dom: ^18
+    react-map-interaction: ^2.1.0
     react-resizable-panels: ^2.0.19
     sass: ^1.77.2
     tailwind-merge: ^2.3.0
@@ -3275,6 +3276,16 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-map-interaction@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "react-map-interaction@npm:2.1.0"
+  peerDependencies:
+    prop-types: ">=15.0.0"
+    react: ">=16.3.0"
+  checksum: 5bf77b57776a26b175dc7f21afe6b8e5a79b0979820bb9e671aa5fd4e65c9438f9fc77ceb9d58ff54812083f1b60230b957757af4674f2ac0e8ad865aeadf792
   languageName: node
   linkType: hard
 

@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.38"],\
             ["react", "npm:18.3.1"],\
             ["react-dom", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:18.3.1"],\
+            ["react-map-interaction", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.1.0"],\
             ["react-resizable-panels", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19"],\
             ["sass", "npm:1.77.2"],\
             ["tailwind-merge", "npm:2.3.0"],\
@@ -3428,6 +3429,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.38"],\
             ["react", "npm:18.3.1"],\
             ["react-dom", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:18.3.1"],\
+            ["react-map-interaction", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.1.0"],\
             ["react-resizable-panels", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.0.19"],\
             ["sass", "npm:1.77.2"],\
             ["tailwind-merge", "npm:2.3.0"],\
@@ -3998,6 +4000,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
           "packageDependencies": [\
             ["react-is", "npm:16.13.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-map-interaction", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/react-map-interaction-npm-2.1.0-d3a714d2b8-5bf77b5777.zip/node_modules/react-map-interaction/",\
+          "packageDependencies": [\
+            ["react-map-interaction", "npm:2.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-map-interaction-virtual-3883163f54/0/cache/react-map-interaction-npm-2.1.0-d3a714d2b8-5bf77b5777.zip/node_modules/react-map-interaction/",\
+          "packageDependencies": [\
+            ["react-map-interaction", "virtual:1e289026913a3c503c45a71705afc70ac8ace135c5e1995a07cda98989615da89f4318a48bbc11dc91e6e33b3c2afe5294ca26880c5e298e8a2d4e3cdeffdef7#npm:2.1.0"],\
+            ["@types/prop-types", null],\
+            ["@types/react", "npm:18.3.3"],\
+            ["prop-types", null],\
+            ["react", "npm:18.3.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/prop-types",\
+            "@types/react",\
+            "prop-types",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
