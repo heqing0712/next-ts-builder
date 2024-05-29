@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./scss/root.scss";
 import "./scss/globals.css";
 import "./scss/layout.scss";
-import BaseHeaer, { BaseHeader } from "@/components/layout/base-header";
+import   { BaseHeader } from "@/components/layout/base-header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,6 +24,7 @@ export default function RootLayout({
           <div className="main">
           {children}
           </div>
+
     
        </div>
       </body>
