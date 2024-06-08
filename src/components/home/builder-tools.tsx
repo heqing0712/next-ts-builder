@@ -29,30 +29,22 @@ import { Button } from "../ui/button";
 import React from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { ChevronDownIcon } from '@radix-ui/react-icons'
+import { useAppState } from "@/store/app";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export function BuilderTools() {
-  const [activeTool, setActiveTool] = useState(BuilderToolsEnum.ARROW);
 
+  const {scalePs,activeTool, setActiveTool} = useAppState()
   const { theme, setTheme } = useTheme();
 
-  function getThemeDom() {
-    if (theme === "dark") {
-      return <ThemeLight onClick={() => setTheme("light")} />;
-    } else {
-      return <ThemeDark onClick={() => setTheme("dark")} />;
-    }
-  }
-
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
-  const [showPanel, setShowPanel] = React.useState<Checked>(false);
+ 
 
   return (
     <>
       <div className="builder-tools">
         <div className="tools-item">
           <div
+            onClick={()=>setActiveTool(BuilderToolsEnum.ARROW)}
             className={[
               "tools-icon",
               activeTool === BuilderToolsEnum.ARROW ? "is-active" : "",
@@ -63,6 +55,7 @@ export function BuilderTools() {
         </div>
         <div className="tools-item">
           <div
+               onClick={()=>setActiveTool(BuilderToolsEnum.HAND)}
             className={[
               "tools-icon",
               activeTool === BuilderToolsEnum.HAND ? "is-active" : "",
@@ -73,6 +66,7 @@ export function BuilderTools() {
         </div>
         <div className="tools-item">
           <div
+           onClick={()=>setActiveTool(BuilderToolsEnum.MESSAGE)}
             className={[
               "tools-icon",
               activeTool === BuilderToolsEnum.MESSAGE ? "is-active" : "",
@@ -100,7 +94,7 @@ export function BuilderTools() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="zoom-dropdown-menu-val">
-                <span className="sel-val">open</span>
+                <span className="sel-val">{ scalePs}%</span>
                 <ChevronDownIcon/>
               </Button>
             </DropdownMenuTrigger>

@@ -280,6 +280,11 @@ export class MapInteractionControlled extends Component {
       scale: newScale,
       translation: this.clampTranslation(newTranslation)
     })
+ 
+    console.log({
+      scale: newScale,
+      translation: this.clampTranslation(newTranslation)
+    })
   }
 
   // Given the start touches and new e.touches, scale and translate
@@ -544,7 +549,8 @@ class MapInteractionController extends Component {
     return (
       <MapInteractionControlled
         onChange={(value) => {
-          controlled ? onChange(value) : this.setState({ value });
+          this.setState({ value });
+          onChange(value) 
         }}
         value={value}
         {...this.innerProps()}
