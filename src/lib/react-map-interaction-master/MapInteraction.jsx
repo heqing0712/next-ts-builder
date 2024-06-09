@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component ,useRef} from 'react';
 import PropTypes from 'prop-types';
-
 import Controls from './Controls';
-
 import { clamp, distance, midpoint, touchPt, touchDistance } from './geometry';
 import makePassiveEventOption from './makePassiveEventOption';
-
+import { setMapInfo } from "@/store/app";
 // The amount that a value of a dimension will change given a new scale
 const coordChange = (coordinate, scaleRatio) => {
   return (scaleRatio * coordinate) - coordinate;
@@ -79,6 +77,8 @@ export class MapInteractionControlled extends Component {
     this.onTouchEnd = this.onTouchEnd.bind(this);
 
     this.onWheel = this.onWheel.bind(this);
+
+      setMapInfo(this)
   }
 
   componentDidMount() {
@@ -346,19 +346,9 @@ export class MapInteractionControlled extends Component {
     return delta / 10;
   }
 
-  // Scale using the center of the content as a focal point
-  changeScale(delta) {
-    const targetScale = this.props.value.scale + delta;
-    const { minScale, maxScale } = this.props;
-    const scale = clamp(minScale, targetScale, maxScale);
 
-    const rect = this.getContainerBoundingClientRect();
-    const x = rect.left + (rect.width / 2);
-    const y = rect.top + (rect.height / 2);
 
-    const focalPoint = this.clientPosToTranslatedPos({ x, y });
-    this.scaleFromPoint(scale, focalPoint);
-  }
+  
 
   // Done like this so it is mockable
   getContainerNode() { return this.containerNode }
@@ -366,6 +356,61 @@ export class MapInteractionControlled extends Component {
     return this.getContainerNode().getBoundingClientRect();
   }
 
+  
+  /**
+   * Scale using the center of the content as a focal point
+   * @param {*} delta 
+   */
+  changeScale(delta) {
+    const targetScale = this.props.value.scale + delta;
+    this.changeScaleByVal(targetScale)
+  }
+
+  /***
+   * 缩放到固定值
+   */
+  changeScaleByVal(targetScale) {
+    const { minScale, maxScale } = this.props;
+    const scale = clamp(minScale, targetScale, maxScale);
+    const rect = this.getContainerBoundingClientRect();
+    const x = rect.left + (rect.width / 2);
+    const y = rect.top + (rect.height / 2);
+    const focalPoint = this.clientPosToTranslatedPos({ x, y });
+    this.scaleFromPoint(scale, focalPoint);
+  }
+
+  /**
+   * 缩放到最小值
+   */
+  changeScaleMin() {
+    const { minScale} = this.props;
+    this.changeScaleByVal(minScale)
+  }
+
+  /**
+   * 重置放大
+   */
+  changeScaleReset() {
+     this.changeScaleByVal(1)
+  }
+
+  /**
+   * 放大
+   */
+  changeScalePlus() {
+    const step = this.discreteScaleStepSize();
+    console.log('step',step)
+    this.changeScale(step)
+  }
+
+  /**
+   * 放小
+   */
+  
+  changeScaleMinus() {
+    const step = this.discreteScaleStepSize();
+    this.changeScale(-step)
+  }
   renderControls() {
     const step = this.discreteScaleStepSize();
     return (
@@ -466,7 +511,7 @@ class MapInteractionController extends Component {
 
   constructor(props) {
     super(props);
-
+    this.mapRef = React.createRef(null)
     const controlled = MapInteractionController.isControlled(props);
     if (controlled) {
       this.state = {
@@ -541,13 +586,19 @@ class MapInteractionController extends Component {
     const controlled = MapInteractionController.isControlled(this.props);
     return controlled ? this.props.value : this.state.value;
   }
-
+ 
+  test() {
+    console.log('测试11')
+ 
+  }
   render() {
     const { onChange, children } = this.props;
     const controlled = MapInteractionController.isControlled(this.props);
     const value = controlled ? this.props.value : this.state.value;
+ 
     return (
       <MapInteractionControlled
+       ref={(v)=>{this.mapRef=v}}
         onChange={(value) => {
           this.setState({ value });
           onChange(value) 

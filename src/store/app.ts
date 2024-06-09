@@ -2,8 +2,22 @@ import { proxy, useSnapshot } from "valtio";
 import { subscribeKey } from "valtio/utils";
 import Decimal from "decimal.js";
 import { BuilderToolsEnum } from "@/configs/enums/BuilderToolsEnum";
+import { MapRef } from "@/types/MapRef";
+interface AppStore {
+  disableZoom: boolean;
+  disablePan: boolean;
+  activeTool: BuilderToolsEnum;
+  mapInfo: object;
+  scalePs: number;
 
-export const appState = proxy({
+  setActiveTool: Fn;
+  setX: Fn;
+  getMapInfo: Fn;
+  setMapInfo: Fn;
+}
+let mapRef: Nullable<MapRef>;
+
+export const appStore = proxy<AppStore>({
   /**
    * 禁止放大
    */
@@ -33,7 +47,7 @@ export const appState = proxy({
    * @param val
    */
   setActiveTool(val: BuilderToolsEnum) {
-    appState.activeTool = val;
+    appStore.activeTool = val;
   },
 
   /**
@@ -41,7 +55,7 @@ export const appState = proxy({
    * @param v
    */
   setX(v: number) {
-    appState.mapInfo.translation.x = v;
+    appStore.mapInfo.translation.x = v;
   },
   /**
    * 获取面板信息
@@ -49,8 +63,8 @@ export const appState = proxy({
    */
   getMapInfo() {
     return {
-      scale: appState.mapInfo.scale,
-      translation: { ...appState.mapInfo.translation },
+      scale: appStore.mapInfo.scale,
+      translation: { ...appStore.mapInfo.translation },
     };
   },
   /**
@@ -59,7 +73,7 @@ export const appState = proxy({
    */
   setMapInfo(mapInfo: any) {
     if (mapInfo !== undefined) {
-      appState.mapInfo = mapInfo;
+      appStore.mapInfo = mapInfo;
     }
   },
 });
@@ -67,25 +81,33 @@ export const appState = proxy({
 /**
  * 监听面板信息，订阅更新
  */
-subscribeKey(appState, "mapInfo", () => {
-  const val = appState.mapInfo.scale.toFixed(2);
+subscribeKey(appStore, "mapInfo", () => {
+  const val = appStore.mapInfo.scale.toFixed(2);
   const bigNumber = new Decimal(val).mul(100);
-  appState.scalePs = Number(bigNumber.toString());
+  appStore.scalePs = Number(bigNumber.toString());
 });
 
 /**
  * 监听面板信息，订阅更新
  */
-subscribeKey(appState, "activeTool", () => {
-  if (appState.activeTool === BuilderToolsEnum.HAND) {
-    appState.disablePan = false;
-    appState.disableZoom = false;
+subscribeKey(appStore, "activeTool", () => {
+  if (appStore.activeTool === BuilderToolsEnum.HAND) {
+    appStore.disablePan = false;
+    appStore.disableZoom = false;
   } else {
-    appState.disablePan = true;
-    appState.disableZoom = true;
+    appStore.disablePan = true;
+    appStore.disableZoom = true;
   }
 });
 
-export const useAppState = () => {
-  return useSnapshot(appState);
+export function setMapInfo(v: MapRef) {
+  mapRef = v;
+}
+
+export function getMapInfo() {
+  return mapRef;
+}
+
+export const useAppStore = () => {
+  return useSnapshot(appStore);
 };

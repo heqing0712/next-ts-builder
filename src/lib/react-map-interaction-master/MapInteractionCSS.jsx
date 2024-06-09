@@ -1,11 +1,12 @@
 
 import MapInteraction from './MapInteraction';
-import React, {  useImperativeHandle } from 'react';
+import React, {  useRef } from 'react';
+
 /*
   This component provides a map like interaction to any content that you place in it. It will let
   the user zoom and pan the children by scaling and translating props.children using css.
 */
-export const MapInteractionCSS = (props,ref) => {
+export const MapInteractionCSS = (props) => {
   const style = {
     height: '100%',
     width: '100%',
@@ -22,9 +23,12 @@ export const MapInteractionCSS = (props,ref) => {
   if (props.disablePan) {
     delete style.cursor;
   }
- 
+  const mapRef = useRef(null);
+
+
+
   return (
-    <MapInteraction {...props}>
+    <MapInteraction {...props} ref={mapRef}>
       {
         ({ translation, scale }) => {
           // Translate first and then scale.  Otherwise, the scale would affect the translation.

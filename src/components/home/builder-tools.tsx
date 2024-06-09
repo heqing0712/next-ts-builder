@@ -29,15 +29,48 @@ import { Button } from "../ui/button";
 import React from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { useAppState } from "@/store/app";
+import { getMapInfo, useAppStore } from "@/store/app";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export function BuilderTools() {
 
-  const {scalePs,activeTool, setActiveTool} = useAppState()
+  const {scalePs,activeTool, setActiveTool,mapRef} = useAppStore()
   const { theme, setTheme } = useTheme();
 
- 
+  /**
+   * 放大
+   */
+  function handleZoom() {
+   getMapInfo()?.changeScalePlus()
+  }
+  
+  /**
+   * 放大
+   */
+  function handleZoomIn() {
+    getMapInfo()?.changeScalePlus()
+  }
+  
+  /**
+   * 缩小
+   */
+  function handleZoomOut() {
+    getMapInfo()?.changeScaleMinus()
+  }
+  
+  /**
+   * 重置
+   */
+  function handleZoomReset() {
+    getMapInfo()?.changeScaleReset()
+  }
+  
+  /**
+   * 缩放到最小值
+   */
+  function handleZoomMin(){
+    getMapInfo()?.changeScaleMin()
+  }
 
   return (
     <>
@@ -101,21 +134,21 @@ export function BuilderTools() {
             <DropdownMenuContent className="w-56 zoom-dropdown-menu-sel" align="start">
         
               <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <div className="zoom-dropdown-menu-item">
+              <DropdownMenuItem >
+                <div className="zoom-dropdown-menu-item" onClick={handleZoom}>
                 <div className="item-l">Zoom</div>
                 <div className="item-r">Z</div>
               </div>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <div className="zoom-dropdown-menu-item">
+                <div className="zoom-dropdown-menu-item" onClick={handleZoomIn}>
                 <div className="item-l">Zoom In</div>
                 <div className="item-r">Ctrl+=</div>
               </div>
               </DropdownMenuItem>
               
               <DropdownMenuItem>
-                <div className="zoom-dropdown-menu-item">
+                <div className="zoom-dropdown-menu-item" onClick={handleZoomOut}>
                 <div className="item-l">Zoom Out</div>
                 <div className="item-r">Ctrl+-</div>
               </div>
@@ -127,13 +160,13 @@ export function BuilderTools() {
               <DropdownMenuGroup>
 
               <DropdownMenuItem>
-                <div className="zoom-dropdown-menu-item">
+                <div className="zoom-dropdown-menu-item" onClick={handleZoomReset}>
                 <div className="item-l">Zoom to 100%</div>
                 <div className="item-r">Shif+0</div>
               </div>
               </DropdownMenuItem>
               <DropdownMenuItem>
-              <div className="zoom-dropdown-menu-item">
+              <div className="zoom-dropdown-menu-item"  onClick={handleZoomMin}>
                 <div className="item-l">Shif to Fix</div>
                 <div className="item-r">Shif+1</div>
               </div>
