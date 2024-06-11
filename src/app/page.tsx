@@ -2,7 +2,7 @@
 import "./scss/page.scss";
 import Image from "next/image";
 import React, { useLayoutEffect, useState,useRef } from "react";
-import { MapInteractionCSS } from "@/lib/react-map-interaction-master";
+import { MapInteractionCSS } from "@/libs/react-map-interaction-master";
 import { BuilderTools } from "@/components/home/builder-tools";
 import { useAppStore } from "@/store/app";
 

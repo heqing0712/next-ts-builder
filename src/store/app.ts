@@ -3,18 +3,8 @@ import { subscribeKey } from "valtio/utils";
 import Decimal from "decimal.js";
 import { BuilderToolsEnum } from "@/configs/enums/BuilderToolsEnum";
 import { MapRef } from "@/types/MapRef";
-interface AppStore {
-  disableZoom: boolean;
-  disablePan: boolean;
-  activeTool: BuilderToolsEnum;
-  mapInfo: object;
-  scalePs: number;
+import { AppStore } from "@/types/AppStore";
 
-  setActiveTool: Fn;
-  setX: Fn;
-  getMapInfo: Fn;
-  setMapInfo: Fn;
-}
 let mapRef: Nullable<MapRef>;
 
 export const appStore = proxy<AppStore>({
@@ -82,7 +72,7 @@ export const appStore = proxy<AppStore>({
  * 监听面板信息，订阅更新
  */
 subscribeKey(appStore, "mapInfo", () => {
-  const val = appStore.mapInfo.scale.toFixed(2);
+  const val = appStore.mapInfo?.scale.toFixed(2);
   const bigNumber = new Decimal(val).mul(100);
   appStore.scalePs = Number(bigNumber.toString());
 });
@@ -108,6 +98,6 @@ export function getMapInfo() {
   return mapRef;
 }
 
-export const useAppStore = () => {
+export const useAppStore = (): AppStore => {
   return useSnapshot(appStore);
 };

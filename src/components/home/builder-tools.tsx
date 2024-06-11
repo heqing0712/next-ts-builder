@@ -34,7 +34,7 @@ type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export function BuilderTools() {
 
-  const {scalePs,activeTool, setActiveTool,mapRef} = useAppStore()
+  const {scalePs,activeTool, setActiveTool } = useAppStore()
   const { theme, setTheme } = useTheme();
 
   /**
