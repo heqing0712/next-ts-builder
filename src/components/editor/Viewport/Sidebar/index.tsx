@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import { SidebarItem } from './SidebarItem';
 
-import CustomizeIcon from '../../../../public/icons/customize.svg';
-import LayerIcon from '../../../../public/icons/layers.svg';
+import CustomizeIcon from '@/assets/icons/customize.svg';
+import LayerIcon from '@/assets/icons/layers.svg';
 import { Toolbar } from '../../Toolbar';
 
 export const SidebarDiv = styled.div<{ enabled: boolean }>`
@@ -165,7 +165,7 @@ export const Sidebar = () => {
             <Layers expandRootOnLoad={true} />
           </div>
         </SidebarItem>
-        <Carbonads />
+ 
       </div>
     </SidebarDiv>
   );

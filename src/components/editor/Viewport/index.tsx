@@ -1,3 +1,4 @@
+"use client"
 import { useEditor } from '@craftjs/core';
 import cx from 'classnames';
 import React, { useEffect } from 'react';

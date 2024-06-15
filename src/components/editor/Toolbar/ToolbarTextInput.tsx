@@ -1,3 +1,4 @@
+"use client"
 import { TextField, makeStyles, InputAdornment } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
