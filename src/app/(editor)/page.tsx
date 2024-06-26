@@ -1,5 +1,5 @@
 "use client";
-import "./scss/page.scss";
+import "./styles/page.scss";
 import Image from "next/image";
 import React, { useLayoutEffect, useState,useRef } from "react";
 import { MapInteractionCSS } from "@/libs/react-map-interaction-master";
