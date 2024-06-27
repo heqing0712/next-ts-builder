@@ -1,13 +1,13 @@
-import { deprecationWarning } from '@craftjs/utils';
-import React, { useEffect } from 'react';
+import { deprecationWarning } from "@/libs/craftjs/utils";
+import React, { useEffect } from "react";
 
-import { Element, ElementProps } from './Element';
+import { Element, ElementProps } from "./Element";
 
 export type CanvasProps<T extends React.ElementType> = ElementProps<T>;
 
 export const deprecateCanvasComponent = () =>
-  deprecationWarning('<Canvas />', {
-    suggest: '<Element canvas={true} />',
+  deprecationWarning("<Canvas />", {
+    suggest: "<Element canvas={true} />",
   });
 
 export function Canvas<T extends React.ElementType>({

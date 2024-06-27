@@ -1,18 +1,18 @@
-import { getRandomId as getRandomNodeId } from '@craftjs/utils';
-import React from 'react';
+import { getRandomId as getRandomNodeId } from "@/libs/craftjs/utils";
+import React from "react";
 
-import { Node, FreshNode, UserComponentConfig } from '../interfaces';
+import { Node, FreshNode, UserComponentConfig } from "../interfaces";
 import {
   defaultElementProps,
   Element,
   Canvas,
   elementPropToNodeData,
   deprecateCanvasComponent,
-} from '../nodes';
-import { NodeProvider } from '../nodes/NodeContext';
+} from "../nodes";
+import { NodeProvider } from "../nodes/NodeContext";
 
 const getNodeTypeName = (type: string | { name: string }) =>
-  typeof type == 'string' ? type : type.name;
+  typeof type == "string" ? type : type.name;
 
 export function createNode(
   newNode: FreshNode,
@@ -116,7 +116,7 @@ export function createNode(
 
     if (userComponentConfig.rules) {
       Object.keys(userComponentConfig.rules).forEach((key) => {
-        if (['canDrag', 'canDrop', 'canMoveIn', 'canMoveOut'].includes(key)) {
+        if (["canDrag", "canDrop", "canMoveIn", "canMoveOut"].includes(key)) {
           node.rules[key] = userComponentConfig.rules[key];
         }
       });

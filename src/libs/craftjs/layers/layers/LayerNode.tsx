@@ -1,10 +1,10 @@
-import { useEditor, ROOT_NODE } from '@craftjs/core';
-import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
+import { useEditor, ROOT_NODE } from "@/libs/craftjs/core";
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react";
 
-import { LayerContextProvider } from './LayerContextProvider';
-import { useLayer } from './useLayer';
+import { LayerContextProvider } from "./LayerContextProvider";
+import { useLayer } from "./useLayer";
 
-import { useLayerManager } from '../manager/useLayerManager';
+import { useLayerManager } from "../manager/useLayerManager";
 
 export const LayerNode: React.FC = () => {
   const { id, depth, children, expanded } = useLayer((layer) => ({
@@ -13,7 +13,7 @@ export const LayerNode: React.FC = () => {
 
   const { data, shouldBeExpanded } = useEditor((state, query) => {
     // TODO: handle multiple selected elements
-    const selected = query.getEvent('selected').first();
+    const selected = query.getEvent("selected").first();
 
     return {
       data: state.nodes[id] && state.nodes[id].data,

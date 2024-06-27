@@ -1,7 +1,7 @@
-import { QueryCallbacksFor } from '@craftjs/utils';
-import React from 'react';
+import { QueryCallbacksFor } from "@/libs/craftjs/utils";
+import React from "react";
 
-import { QueryMethods } from '../editor/query';
+import { QueryMethods } from "../editor/query";
 
 export type UserComponentConfig<T> = {
   displayName: string;
@@ -22,7 +22,7 @@ export type UserComponent<T = any> = React.ComponentType<T> & {
 };
 
 export type NodeId = string;
-export type NodeEventTypes = 'selected' | 'dragged' | 'hovered';
+export type NodeEventTypes = "selected" | "dragged" | "hovered";
 
 export type Node = {
   id: NodeId;
@@ -35,7 +35,7 @@ export type Node = {
   _hydrationTimestamp: number;
 };
 
-export type NodeHelpersType = QueryCallbacksFor<typeof QueryMethods>['node'];
+export type NodeHelpersType = QueryCallbacksFor<typeof QueryMethods>["node"];
 export type NodeRules = {
   canDrag(node: Node, helpers: NodeHelpersType): boolean;
   canDrop(dropTarget: Node, self: Node, helpers: NodeHelpersType): boolean;
@@ -60,7 +60,7 @@ export type NodeData = {
 
 export type FreshNode = {
   id?: NodeId;
-  data: Partial<NodeData> & Required<Pick<NodeData, 'type'>>;
+  data: Partial<NodeData> & Required<Pick<NodeData, "type">>;
 };
 
 export type ReduceCompType =
@@ -77,7 +77,7 @@ export type ReducedComp = {
 
 export type SerializedNode = Omit<
   NodeData,
-  'type' | 'subtype' | 'name' | 'event'
+  "type" | "subtype" | "name" | "event"
 > &
   ReducedComp;
 
@@ -109,13 +109,12 @@ export enum NodeSelectorType {
   Obj,
 }
 
-export type NodeSelector<
-  T extends NodeSelectorType = NodeSelectorType.Any
-> = T extends NodeSelectorType.Id
-  ? NodeIdSelector
-  : T extends NodeSelectorType.Obj
-  ? NodeObjSelector
-  : NodeIdSelector | NodeObjSelector;
+export type NodeSelector<T extends NodeSelectorType = NodeSelectorType.Any> =
+  T extends NodeSelectorType.Id
+    ? NodeIdSelector
+    : T extends NodeSelectorType.Obj
+    ? NodeObjSelector
+    : NodeIdSelector | NodeObjSelector;
 
 export type NodeSelectorWrapper = {
   node: Node;

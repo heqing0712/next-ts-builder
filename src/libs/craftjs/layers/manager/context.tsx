@@ -1,7 +1,7 @@
-import { SubscriberAndCallbacksFor } from '@craftjs/utils';
-import { createContext } from 'react';
+import { SubscriberAndCallbacksFor } from "@/libs/craftjs/utils";
+import { createContext } from "react";
 
-import { LayerMethods } from './actions';
+import { LayerMethods } from "./actions";
 
 export type LayerStore = SubscriberAndCallbacksFor<typeof LayerMethods>;
 export type LayerManagerContextType = {

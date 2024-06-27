@@ -1,13 +1,13 @@
-import { useEditor } from '@craftjs/core';
-import { Layers } from '@craftjs/layers';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useEditor } from "@/libs/craftjs/core";
+import { Layers } from "@/libs/craftjs/layers";
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { SidebarItem } from './SidebarItem';
+import { SidebarItem } from "./SidebarItem";
 
-import CustomizeIcon from '@/assets/icons/customize.svg';
-import LayerIcon from '@/assets/icons/layers.svg';
-import { Toolbar } from '../../Toolbar';
+import CustomizeIcon from "@/assets/icons/customize.svg";
+import LayerIcon from "@/assets/icons/layers.svg";
+import { Toolbar } from "../../Toolbar";
 
 export const SidebarDiv = styled.div<{ enabled: boolean }>`
   width: 280px;
@@ -26,8 +26,8 @@ const CarbonAdsContainer = styled.div`
   }
 
   #carbonads {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
       sans-serif;
 
     padding: 10px 0.5rem;
@@ -110,20 +110,20 @@ const Carbonads = () => {
       return;
     }
 
-    const script = document.createElement('script');
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('async', 'true');
+    const script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("async", "true");
 
     script.setAttribute(
-      'src',
-      '//cdn.carbonads.com/carbon.js?serve=CEAI453N&placement=craftjsorg'
+      "src",
+      "//cdn.carbonads.com/carbon.js?serve=CEAI453N&placement=craftjsorg"
     );
-    script.setAttribute('id', '_carbonads_js');
+    script.setAttribute("id", "_carbonads_js");
 
     dom.appendChild(script);
 
     return () => {
-      const ad = dom.querySelector('#carbonads');
+      const ad = dom.querySelector("#carbonads");
       if (ad) {
         dom.removeChild(ad);
       }
@@ -148,7 +148,7 @@ export const Sidebar = () => {
         <SidebarItem
           icon={CustomizeIcon}
           title="Customize"
-          height={!layersVisible ? 'full' : '55%'}
+          height={!layersVisible ? "full" : "55%"}
           visible={toolbarVisible}
           onChange={(val) => setToolbarVisible(val)}
         >
@@ -157,7 +157,7 @@ export const Sidebar = () => {
         <SidebarItem
           icon={LayerIcon}
           title="Layers"
-          height={!toolbarVisible ? 'full' : '45%'}
+          height={!toolbarVisible ? "full" : "45%"}
           visible={layersVisible}
           onChange={(val) => setLayerVisible(val)}
         >
@@ -165,7 +165,6 @@ export const Sidebar = () => {
             <Layers expandRootOnLoad={true} />
           </div>
         </SidebarItem>
- 
       </div>
     </SidebarDiv>
   );

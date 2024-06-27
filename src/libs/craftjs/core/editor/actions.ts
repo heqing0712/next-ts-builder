@@ -9,10 +9,10 @@ import {
   CallbacksFor,
   Delete,
   ERROR_NOT_IN_RESOLVER,
-} from '@craftjs/utils';
-import invariant from 'tiny-invariant';
+} from "@/libs/craftjs/utils";
+import invariant from "tiny-invariant";
 
-import { QueryMethods } from './query';
+import { QueryMethods } from "./query";
 
 import {
   EditorState,
@@ -26,10 +26,10 @@ import {
   SerializedNodes,
   NodeSelector,
   NodeSelectorType,
-} from '../interfaces';
-import { fromEntries } from '../utils/fromEntries';
-import { getNodesFromSelector } from '../utils/getNodesFromSelector';
-import { removeNodeFromEvents } from '../utils/removeNodeFromEvents';
+} from "../interfaces";
+import { fromEntries } from "../utils/fromEntries";
+import { getNodesFromSelector } from "../utils/getNodesFromSelector";
+import { removeNodeFromEvents } from "../utils/removeNodeFromEvents";
 
 const Methods = (
   state: EditorState,
@@ -41,22 +41,22 @@ const Methods = (
     parentId?: NodeId,
     addNodeType?:
       | {
-          type: 'child';
+          type: "child";
           index: number;
         }
       | {
-          type: 'linked';
+          type: "linked";
           id: string;
         }
   ) => {
     const iterateChildren = (id: NodeId, parentId?: NodeId) => {
       const node = tree.nodes[id];
-
-      if (typeof node.data.type !== 'string') {
+      console.log("addNodeTreeToParent", `id:${id},parentId:${parentId}`);
+      if (typeof node.data.type !== "string") {
         invariant(
           state.options.resolver[node.data.name],
           ERROR_NOT_IN_RESOLVER.replace(
-            '%node_type%',
+            "%node_type%",
             `${(node.data.type as any).name}`
           )
         );
@@ -90,7 +90,7 @@ const Methods = (
 
     const parent = getParentAndValidate(parentId);
 
-    if (addNodeType.type === 'child') {
+    if (addNodeType.type === "child") {
       const index = addNodeType.index;
 
       if (index != null) {
@@ -165,7 +165,7 @@ const Methods = (
         deleteNode(existingLinkedNode);
       }
 
-      addNodeTreeToParent(tree, parentId, { type: 'linked', id });
+      addNodeTreeToParent(tree, parentId, { type: "linked", id });
     },
 
     /**
@@ -179,8 +179,8 @@ const Methods = (
       // TODO: Deprecate adding array of Nodes to keep implementation simpler
       let nodes = [nodeToAdd];
       if (Array.isArray(nodeToAdd)) {
-        deprecationWarning('actions.add(node: Node[])', {
-          suggest: 'actions.add(node: Node)',
+        deprecationWarning("actions.add(node: Node[])", {
+          suggest: "actions.add(node: Node)",
         });
         nodes = nodeToAdd;
       }
@@ -193,7 +193,7 @@ const Methods = (
             rootNodeId: node.id,
           },
           parentId,
-          { type: 'child', index }
+          { type: "child", index }
         );
       });
     },
@@ -206,7 +206,8 @@ const Methods = (
      * @param index
      */
     addNodeTree(tree: NodeTree, parentId?: NodeId, index?: number) {
-      addNodeTreeToParent(tree, parentId, { type: 'child', index });
+      console.log("add node tree");
+      addNodeTreeToParent(tree, parentId, { type: "child", index });
     },
 
     /**
@@ -230,7 +231,7 @@ const Methods = (
 
     deserialize(input: SerializedNodes | string) {
       const dehydratedNodes =
-        typeof input == 'string' ? JSON.parse(input) : input;
+        typeof input == "string" ? JSON.parse(input) : input;
 
       const nodePairs = Object.keys(dehydratedNodes).map((id) => {
         let nodeId = id;
@@ -286,7 +287,7 @@ const Methods = (
         nodesArrToCleanup.add(currentParentNodes);
 
         const oldIndex = currentParentNodes.indexOf(targetId);
-        currentParentNodes[oldIndex] = '$$'; // mark for deletion
+        currentParentNodes[oldIndex] = "$$"; // mark for deletion
 
         newParent.data.nodes.splice(index + i, 0, targetId);
 
@@ -297,7 +298,7 @@ const Methods = (
         const length = nodes.length;
 
         [...nodes].reverse().forEach((value, index) => {
-          if (value !== '$$') {
+          if (value !== "$$") {
             return;
           }
 
@@ -312,9 +313,9 @@ const Methods = (
     },
 
     clearEvents() {
-      this.setNodeEvent('selected', null);
-      this.setNodeEvent('hovered', null);
-      this.setNodeEvent('dragged', null);
+      this.setNodeEvent("selected", null);
+      this.setNodeEvent("hovered", null);
+      this.setNodeEvent("dragged", null);
       this.setIndicator(null);
     },
 
@@ -370,7 +371,7 @@ const Methods = (
      */
     setCustom<T extends NodeId>(
       selector: NodeSelector<NodeSelectorType.Id>,
-      cb: (data: EditorState['nodes'][T]['data']['custom']) => void
+      cb: (data: EditorState["nodes"][T]["data"]["custom"]) => void
     ) {
       const targets = getNodesFromSelector(state.nodes, selector, {
         idOnly: true,
@@ -439,14 +440,14 @@ const Methods = (
         });
 
         this.setNodeEvent(
-          'selected',
+          "selected",
           targets.map(({ node }) => node.id)
         );
       } else {
-        this.setNodeEvent('selected', null);
+        this.setNodeEvent("selected", null);
       }
 
-      this.setNodeEvent('hovered', null);
+      this.setNodeEvent("hovered", null);
     },
   };
 };
@@ -462,7 +463,7 @@ export const ActionMethods = (
     setState(
       cb: (
         state: EditorState,
-        actions: Delete<CallbacksFor<typeof Methods>, 'history'>
+        actions: Delete<CallbacksFor<typeof Methods>, "history">
       ) => void
     ) {
       const { history, ...actions } = this;

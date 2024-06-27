@@ -61,6 +61,7 @@ export const Section = (props: Partial<SectionProps>) => {
     <Resizer
       enable={["top", "bottom"]}
       propKey={{ width: "width", height: "height" }}
+      className="section-resizer"
       style={{
         justifyContent,
         flexDirection,

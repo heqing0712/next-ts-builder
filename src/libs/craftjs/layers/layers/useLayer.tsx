@@ -1,16 +1,18 @@
-import { useEditor } from '@craftjs/core';
-import { wrapConnectorHooks } from '@craftjs/utils';
-import { useContext, useMemo } from 'react';
+import { useEditor } from "@/libs/craftjs/core";
+import { wrapConnectorHooks } from "@/libs/craftjs/utils";
+import { useContext, useMemo } from "react";
 
-import { LayerContext } from './LayerContext';
+import { LayerContext } from "./LayerContext";
 
-import { Layer } from '../interfaces';
-import { useLayerManager } from '../manager';
+import { Layer } from "../interfaces";
+import { useLayerManager } from "../manager";
 
 export function useLayer<S = null>(collect?: (layer: Layer) => S) {
-  const { id, depth, connectors: internalConnectors } = useContext(
-    LayerContext
-  );
+  const {
+    id,
+    depth,
+    connectors: internalConnectors,
+  } = useContext(LayerContext);
 
   const { actions: managerActions, ...collected } = useLayerManager((state) => {
     return id && state.layers[id] && collect && collect(state.layers[id]);

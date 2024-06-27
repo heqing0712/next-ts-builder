@@ -1,21 +1,21 @@
-import { Element, useEditor } from '@craftjs/core';
-import { Tooltip } from '@material-ui/core';
-import React from 'react';
-import styled from 'styled-components';
+import { Element, useEditor } from "@/libs/craftjs/core";
+import { Tooltip } from "@material-ui/core";
+import React from "react";
+import styled from "styled-components";
 
-import ButtonSvg from '@/assets/icons/toolbox/button.svg';
-import SquareSvg from '@/assets/icons/toolbox/rectangle.svg';
-import TypeSvg from '@/assets/icons/toolbox/text.svg';
-import YoutubeSvg from '@/assets/icons/toolbox/video-line.svg';
-import { Button } from '../../selectors/Button';
-import { Container } from '../../selectors/Container';
-import { Text } from '../../selectors/Text';
-import { Video } from '../../selectors/Video';
+import ButtonSvg from "@/assets/icons/toolbox/button.svg";
+import SquareSvg from "@/assets/icons/toolbox/rectangle.svg";
+import TypeSvg from "@/assets/icons/toolbox/text.svg";
+import YoutubeSvg from "@/assets/icons/toolbox/video-line.svg";
+import { Button } from "../../selectors/Button";
+import { Container } from "../../selectors/Container";
+import { Text } from "../../selectors/Text";
+import { Video } from "../../selectors/Video";
 
 const ToolboxDiv = styled.div<{ enabled: boolean }>`
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  ${(props) => (!props.enabled ? `width: 0;` : '')}
-  ${(props) => (!props.enabled ? `opacity: 0;` : '')}
+  ${(props) => (!props.enabled ? `width: 0;` : "")}
+  ${(props) => (!props.enabled ? `opacity: 0;` : "")}
 `;
 
 const Item = styled.a<{ move?: boolean }>`

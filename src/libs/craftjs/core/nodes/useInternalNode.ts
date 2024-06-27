@@ -1,14 +1,14 @@
 import {
   wrapConnectorHooks,
   ERROR_USE_NODE_OUTSIDE_OF_EDITOR_CONTEXT,
-} from '@craftjs/utils';
-import { useMemo, useContext } from 'react';
-import invariant from 'tiny-invariant';
+} from "@/libs/craftjs/utils";
+import { useMemo, useContext } from "react";
+import invariant from "tiny-invariant";
 
-import { NodeContext } from './NodeContext';
+import { NodeContext } from "./NodeContext";
 
-import { useInternalEditor } from '../editor/useInternalEditor';
-import { Node } from '../interfaces';
+import { useInternalEditor } from "../editor/useInternalEditor";
+import { Node } from "../interfaces";
 
 export function useInternalNode<S = null>(collect?: (node: Node) => S) {
   const context = useContext(NodeContext);

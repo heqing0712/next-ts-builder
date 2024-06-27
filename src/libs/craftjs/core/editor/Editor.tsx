@@ -1,12 +1,15 @@
-import { ERROR_RESOLVER_NOT_AN_OBJECT, HISTORY_ACTIONS } from '@craftjs/utils';
-import React, { useEffect, useRef } from 'react';
-import invariant from 'tiny-invariant';
+import {
+  ERROR_RESOLVER_NOT_AN_OBJECT,
+  HISTORY_ACTIONS,
+} from "@/libs/craftjs/utils";
+import React, { useEffect, useRef } from "react";
+import invariant from "tiny-invariant";
 
-import { EditorContext } from './EditorContext';
-import { useEditorStore } from './store';
+import { EditorContext } from "./EditorContext";
+import { useEditorStore } from "./store";
 
-import { Events } from '../events';
-import { Options } from '../interfaces';
+import { Events } from "../events";
+import { Options } from "../interfaces";
 
 /**
  * A React Component that provides the Editor context
@@ -18,7 +21,7 @@ export const Editor: React.FC<React.PropsWithChildren<Partial<Options>>> = ({
   // we do not want to warn the user if no resolver was supplied
   if (options.resolver !== undefined) {
     invariant(
-      typeof options.resolver === 'object' &&
+      typeof options.resolver === "object" &&
         !Array.isArray(options.resolver) &&
         options.resolver !== null,
       ERROR_RESOLVER_NOT_AN_OBJECT
@@ -39,7 +42,7 @@ export const Editor: React.FC<React.PropsWithChildren<Partial<Options>>> = ({
       for (let i = 0; i < patches.length; i++) {
         const { path } = patches[i];
         const isModifyingNodeData =
-          path.length > 2 && path[0] === 'nodes' && path[2] === 'data';
+          path.length > 2 && path[0] === "nodes" && path[2] === "data";
 
         let actionType = actionPerformed.type;
 
@@ -53,7 +56,7 @@ export const Editor: React.FC<React.PropsWithChildren<Partial<Options>>> = ({
         }
 
         if (
-          ['setState', 'deserialize'].includes(actionPerformed.type) ||
+          ["setState", "deserialize"].includes(actionPerformed.type) ||
           isModifyingNodeData
         ) {
           normalizer((draft) => {

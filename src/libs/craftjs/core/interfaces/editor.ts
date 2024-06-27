@@ -1,12 +1,16 @@
-import { QueryCallbacksFor, Delete, PatchListenerAction } from '@craftjs/utils';
+import {
+  QueryCallbacksFor,
+  Delete,
+  PatchListenerAction,
+} from "@/libs/craftjs/utils";
 
-import { Placement } from './events';
-import { Nodes, NodeEventTypes, NodeId, Node } from './nodes';
+import { Placement } from "./events";
+import { Nodes, NodeEventTypes, NodeId, Node } from "./nodes";
 
-import { QueryMethods } from '../editor/query';
-import { EditorStore, ActionMethodsWithConfig } from '../editor/store';
-import { useInternalEditorReturnType } from '../editor/useInternalEditor';
-import { CoreEventHandlers } from '../events';
+import { QueryMethods } from "../editor/query";
+import { EditorStore, ActionMethodsWithConfig } from "../editor/store";
+import { useInternalEditorReturnType } from "../editor/useInternalEditor";
+import { CoreEventHandlers } from "../events";
 
 export type Options = {
   onRender: React.ComponentType<{ render: React.ReactElement }>;
@@ -30,7 +34,7 @@ export type Options = {
     previousState: EditorState,
     actionPerformed: Delete<
       PatchListenerAction<typeof ActionMethodsWithConfig>,
-      'patches'
+      "patches"
     >,
     query: QueryCallbacksFor<typeof QueryMethods>
   ) => void;

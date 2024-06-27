@@ -1,0 +1,21 @@
+.section-resizer {
+    &.component-selected{
+  
+     &::after{
+        content: ' ';
+        pointer-events: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        display: block;
+        height: 100%;
+        width: 100%;
+        border-width:2px;
+        border-style: solid;
+        border-color: var(--ai-primary);
+     }
+    }
+    .cmCFxB span{
+        border-color:var(--ai-primary);
+    }
+  }

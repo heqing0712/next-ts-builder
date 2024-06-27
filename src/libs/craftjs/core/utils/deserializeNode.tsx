@@ -1,26 +1,26 @@
-import { ERROR_DESERIALIZE_COMPONENT_NOT_IN_RESOLVER } from '@craftjs/utils';
-import React from 'react';
-import invariant from 'tiny-invariant';
+import { ERROR_DESERIALIZE_COMPONENT_NOT_IN_RESOLVER } from "@/libs/craftjs/utils";
+import React from "react";
+import invariant from "tiny-invariant";
 
-import { resolveComponent } from './resolveComponent';
+import { resolveComponent } from "./resolveComponent";
 
 import {
   NodeData,
   SerializedNode,
   ReducedComp,
   ReduceCompType,
-} from '../interfaces';
-import { Resolver } from '../interfaces';
-import { Canvas } from '../nodes/Canvas';
+} from "../interfaces";
+import { Resolver } from "../interfaces";
+import { Canvas } from "../nodes/Canvas";
 
 type DeserialisedType = JSX.Element & { name: string };
 
 const restoreType = (type: ReduceCompType, resolver: Resolver) =>
-  typeof type === 'object' && type.resolvedName
-    ? type.resolvedName === 'Canvas'
+  typeof type === "object" && type.resolvedName
+    ? type.resolvedName === "Canvas"
       ? Canvas
       : resolver[type.resolvedName]
-    : typeof type === 'string'
+    : typeof type === "string"
     ? type
     : null;
 
@@ -41,11 +41,11 @@ export const deserializeComp = (
     const prop = props[key];
     if (prop === null || prop === undefined) {
       result[key] = null;
-    } else if (typeof prop === 'object' && prop.resolvedName) {
+    } else if (typeof prop === "object" && prop.resolvedName) {
       result[key] = deserializeComp(prop, resolver);
-    } else if (key === 'children' && Array.isArray(prop)) {
+    } else if (key === "children" && Array.isArray(prop)) {
       result[key] = prop.map((child) => {
-        if (typeof child === 'string') {
+        if (typeof child === "string") {
           return child;
         }
         return deserializeComp(child, resolver);
@@ -75,10 +75,10 @@ export const deserializeComp = (
 export const deserializeNode = (
   data: SerializedNode,
   resolver: Resolver
-): Omit<NodeData, 'event'> => {
+): Omit<NodeData, "event"> => {
   const { type: Comp, props: Props, ...nodeData } = data;
 
-  const isCompAnHtmlElement = Comp !== undefined && typeof Comp === 'string';
+  const isCompAnHtmlElement = Comp !== undefined && typeof Comp === "string";
   const isCompAUserComponent =
     Comp !== undefined &&
     (Comp as { resolvedName?: string }).resolvedName !== undefined;
@@ -86,15 +86,15 @@ export const deserializeNode = (
   invariant(
     isCompAnHtmlElement || isCompAUserComponent,
     ERROR_DESERIALIZE_COMPONENT_NOT_IN_RESOLVER.replace(
-      '%displayName%',
+      "%displayName%",
       data.displayName
-    ).replace('%availableComponents%', Object.keys(resolver).join(', '))
+    ).replace("%availableComponents%", Object.keys(resolver).join(", "))
   );
 
-  const { type, name, props } = (deserializeComp(
+  const { type, name, props } = deserializeComp(
     data,
     resolver
-  ) as unknown) as NodeData;
+  ) as unknown as NodeData;
 
   const { parent, custom, displayName, isCanvas, nodes, hidden } = nodeData;
 

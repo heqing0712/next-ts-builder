@@ -1,8 +1,8 @@
-import { NodeId } from '@craftjs/core';
-import { EventHandlerConnectors } from '@craftjs/utils';
-import React from 'react';
+import { NodeId } from "@/libs/craftjs/core";
+import { EventHandlerConnectors } from "@/libs/craftjs/utils";
+import React from "react";
 
-import { LayerHandlers } from '../events/LayerHandlers';
+import { LayerHandlers } from "../events/LayerHandlers";
 
 export type LayerContextType = {
   id: NodeId;

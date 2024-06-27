@@ -1,18 +1,18 @@
-import { Overwrite, Delete, OverwriteFnReturnType } from '@craftjs/utils';
-import { useMemo } from 'react';
+import { Overwrite, Delete, OverwriteFnReturnType } from "@/libs/craftjs/utils";
+import { useMemo } from "react";
 
 import {
   useInternalEditor,
   EditorCollector,
   useInternalEditorReturnType,
-} from '../editor/useInternalEditor';
+} from "../editor/useInternalEditor";
 
 type PrivateActions =
-  | 'addLinkedNodeFromTree'
-  | 'setNodeEvent'
-  | 'setDOM'
-  | 'replaceNodes'
-  | 'reset';
+  | "addLinkedNodeFromTree"
+  | "setNodeEvent"
+  | "setDOM"
+  | "replaceNodes"
+  | "reset";
 
 const getPublicActions = (actions) => {
   const {
@@ -28,18 +28,18 @@ const getPublicActions = (actions) => {
 };
 
 export type WithoutPrivateActions<S = null> = Delete<
-  useInternalEditorReturnType<S>['actions'],
-  PrivateActions | 'history'
+  useInternalEditorReturnType<S>["actions"],
+  PrivateActions | "history"
 > & {
   history: Overwrite<
-    useInternalEditorReturnType<S>['actions']['history'],
+    useInternalEditorReturnType<S>["actions"]["history"],
     {
       ignore: OverwriteFnReturnType<
-        useInternalEditorReturnType<S>['actions']['history']['ignore'],
+        useInternalEditorReturnType<S>["actions"]["history"]["ignore"],
         PrivateActions
       >;
       throttle: OverwriteFnReturnType<
-        useInternalEditorReturnType<S>['actions']['history']['throttle'],
+        useInternalEditorReturnType<S>["actions"]["history"]["throttle"],
         PrivateActions
       >;
     }
@@ -50,7 +50,7 @@ export type useEditorReturnType<S = null> = Overwrite<
   useInternalEditorReturnType<S>,
   {
     actions: WithoutPrivateActions;
-    query: Delete<useInternalEditorReturnType<S>['query'], 'deserialize'>;
+    query: Delete<useInternalEditorReturnType<S>["query"], "deserialize">;
   }
 >;
 

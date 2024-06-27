@@ -1,7 +1,7 @@
-import { ERROR_INVALID_NODEID } from '@craftjs/utils';
-import invariant from 'tiny-invariant';
+import { ERROR_INVALID_NODEID } from "@/libs/craftjs/utils";
+import invariant from "tiny-invariant";
 
-import { Nodes, Node, NodeSelectorWrapper, NodeSelector } from '../interfaces';
+import { Nodes, Node, NodeSelectorWrapper, NodeSelector } from "../interfaces";
 
 type config = { existOnly: boolean; idOnly: boolean };
 export const getNodesFromSelector = (
@@ -20,14 +20,14 @@ export const getNodesFromSelector = (
   const nodeSelectors = items
     .filter((item) => !!item)
     .map((item) => {
-      if (typeof item === 'string') {
+      if (typeof item === "string") {
         return {
           node: nodes[item],
           exists: !!nodes[item],
         };
       }
 
-      if (typeof item === 'object' && !mergedConfig.idOnly) {
+      if (typeof item === "object" && !mergedConfig.idOnly) {
         const node = item as Node;
         return {
           node,

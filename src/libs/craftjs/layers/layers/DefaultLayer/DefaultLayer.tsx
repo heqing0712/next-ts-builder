@@ -1,17 +1,17 @@
-import { useEditor } from '@craftjs/core';
-import React from 'react';
-import styled from 'styled-components';
+import { useEditor } from "@/libs/craftjs/core";
+import React from "react";
+import styled from "styled-components";
 
-import { DefaultLayerHeader } from './DefaultLayerHeader';
+import { DefaultLayerHeader } from "./DefaultLayerHeader";
 
-import { useLayer } from '../useLayer';
+import { useLayer } from "../useLayer";
 
 const LayerNodeDiv = styled.div<{
   expanded: boolean;
   hasCanvases: boolean;
   hovered: boolean;
 }>`
-  background: ${(props) => (props.hovered ? '#f1f1f1' : 'transparent')};
+  background: ${(props) => (props.hovered ? "#f1f1f1" : "transparent")};
   display: block;
   padding-bottom: ${(props) => (props.hasCanvases && props.expanded ? 5 : 0)}px;
 `;
@@ -19,7 +19,7 @@ const LayerNodeDiv = styled.div<{
 const LayerChildren = styled.div<{ hasCanvases: boolean }>`
   margin: 0 0 0 ${(props) => (props.hasCanvases ? 35 : 0)}px;
   background: ${(props) =>
-    props.hasCanvases ? 'rgba(255, 255, 255, 0.02)' : 'transparent'};
+    props.hasCanvases ? "rgba(255, 255, 255, 0.02)" : "transparent"};
   position: relative;
 
   ${(props) =>
@@ -41,7 +41,7 @@ const LayerChildren = styled.div<{ hasCanvases: boolean }>`
       background:#00000012;
     }
   `
-      : ''}
+      : ""}
 `;
 
 export const DefaultLayer: React.FC<{ children?: React.ReactNode }> = ({

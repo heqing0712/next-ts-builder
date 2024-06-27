@@ -1,5 +1,5 @@
 "use client";
-import { useNode, useEditor } from "@craftjs/core";
+import { useNode, useEditor } from "@/libs/craftjs/core";
 import cx from "classnames";
 import { debounce } from "debounce";
 import { Resizable } from "re-resizable";
@@ -197,20 +197,23 @@ export const Resizer = (props) => {
   const fourHorn = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
   const currentEnable = props.enable || defaultEnable;
+  const item = currentEnable.find((d) => fourHorn.includes(d));
+  //console.log(item);
   /**
    * 没有四角
    */
-  const isNoFourHorn = currentEnable.find((d) => fourHorn.includes(d)) === null;
+  const isNoFourHorn = !currentEnable.find((d) => fourHorn.includes(d));
 
-  const setEnable = currentEnable.reduce((acc: any, key) => {
+  const getEnable = currentEnable.reduce((acc: any, key) => {
     acc[key] = active && inNodeContext;
     return acc;
   }, {});
+  const _props = { ...props };
+  delete _props.propKey;
 
-  console.log(props.className);
   return (
     <Resizable
-      enable={setEnable}
+      enable={getEnable}
       className={cx([
         {
           "m-auto": isRootNode,
@@ -270,10 +273,10 @@ export const Resizer = (props) => {
         isResizing.current = false;
         updateInternalDimensionsWithOriginal();
       }}
-      {...props}
+      {..._props}
     >
       {children}
-      {active && isNoFourHorn && (
+      {active && !isNoFourHorn && (
         <Indicators bound={fillSpace === "yes" ? parentDirection : false}>
           <span></span>
           <span></span>
@@ -282,10 +285,13 @@ export const Resizer = (props) => {
         </Indicators>
       )}
 
-      {active && !isNoFourHorn && (
-        <Indicators
-          bound={fillSpace === "yes" ? parentDirection : false}
-        ></Indicators>
+      {active && isNoFourHorn && (
+        <Indicators bound={fillSpace === "yes" ? parentDirection : false}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </Indicators>
       )}
     </Resizable>
   );

@@ -1,10 +1,10 @@
-import { RenderIndicator, getDOMInfo } from '@craftjs/utils';
-import React, { useEffect } from 'react';
+import { RenderIndicator, getDOMInfo } from "@/libs/craftjs/utils";
+import React, { useEffect } from "react";
 
-import { useEventHandler } from './EventContext';
-import movePlaceholder from './movePlaceholder';
+import { useEventHandler } from "./EventContext";
+import movePlaceholder from "./movePlaceholder";
 
-import { useInternalEditor } from '../editor/useInternalEditor';
+import { useInternalEditor } from "../editor/useInternalEditor";
 
 export const RenderEditorIndicator = () => {
   const { indicator, indicatorOptions, enabled } = useInternalEditor(
@@ -46,7 +46,7 @@ export const RenderEditorIndicator = () => {
       backgroundColor: indicator.error
         ? indicatorOptions.error
         : indicatorOptions.success,
-      transition: indicatorOptions.transition || '0.2s ease-in',
+      transition: indicatorOptions.transition || "0.2s ease-in",
     },
     parentDom: indicator.placement.parent.dom,
   });

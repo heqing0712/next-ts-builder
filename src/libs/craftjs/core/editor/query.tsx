@@ -5,14 +5,14 @@ import {
   deprecationWarning,
   DEPRECATED_ROOT_NODE,
   ROOT_NODE,
-} from '@craftjs/utils';
-import React from 'react';
-import invariant from 'tiny-invariant';
+} from "@/libs/craftjs/utils";
+import React from "react";
+import invariant from "tiny-invariant";
 
-import { EventHelpers } from './EventHelpers';
-import { NodeHelpers } from './NodeHelpers';
+import { EventHelpers } from "./EventHelpers";
+import { NodeHelpers } from "./NodeHelpers";
 
-import findPosition from '../events/findPosition';
+import findPosition from "../events/findPosition";
 import {
   NodeId,
   EditorState,
@@ -26,14 +26,14 @@ import {
   SerializedNodes,
   SerializedNode,
   FreshNode,
-} from '../interfaces';
-import { createNode } from '../utils/createNode';
-import { deserializeNode } from '../utils/deserializeNode';
-import { fromEntries } from '../utils/fromEntries';
-import { getNodesFromSelector } from '../utils/getNodesFromSelector';
-import { mergeTrees } from '../utils/mergeTrees';
-import { parseNodeFromJSX } from '../utils/parseNodeFromJSX';
-import { resolveComponent } from '../utils/resolveComponent';
+} from "../interfaces";
+import { createNode } from "../utils/createNode";
+import { deserializeNode } from "../utils/deserializeNode";
+import { fromEntries } from "../utils/fromEntries";
+import { getNodesFromSelector } from "../utils/getNodesFromSelector";
+import { mergeTrees } from "../utils/mergeTrees";
+import { parseNodeFromJSX } from "../utils/parseNodeFromJSX";
+import { resolveComponent } from "../utils/resolveComponent";
 
 export function QueryMethods(state: EditorState) {
   const options = state && state.options;
@@ -195,7 +195,7 @@ export function QueryMethods(state: EditorState) {
         const data = deserializeNode(serializedNode, state.options.resolver);
         invariant(data.type, ERROR_NOT_IN_RESOLVER);
 
-        const id = typeof normalize === 'string' && normalize;
+        const id = typeof normalize === "string" && normalize;
 
         if (id) {
           deprecationWarning(`query.parseSerializedNode(...).toNode(id)`, {

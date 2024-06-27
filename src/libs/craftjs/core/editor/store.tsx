@@ -2,13 +2,13 @@ import {
   useMethods,
   SubscriberAndCallbacksFor,
   PatchListener,
-} from '@craftjs/utils';
+} from "@/libs/craftjs/utils";
 
-import { ActionMethods } from './actions';
-import { QueryMethods } from './query';
+import { ActionMethods } from "./actions";
+import { QueryMethods } from "./query";
 
-import { DefaultEventHandlers } from '../events';
-import { EditorState, Options, NodeEventTypes, NodeId } from '../interfaces';
+import { DefaultEventHandlers } from "../events";
+import { EditorState, Options, NodeEventTypes, NodeId } from "../interfaces";
 
 export const editorInitialState: EditorState = {
   nodes: {},
@@ -25,8 +25,8 @@ export const editorInitialState: EditorState = {
     resolver: {},
     enabled: true,
     indicator: {
-      error: 'red',
-      success: 'rgb(98, 196, 98)',
+      error: "red",
+      success: "rgb(98, 196, 98)",
     },
     handlers: (store) =>
       new DefaultEventHandlers({
@@ -41,12 +41,12 @@ export const editorInitialState: EditorState = {
 export const ActionMethodsWithConfig = {
   methods: ActionMethods,
   ignoreHistoryForActions: [
-    'setDOM',
-    'setNodeEvent',
-    'selectNode',
-    'clearEvents',
-    'setOptions',
-    'setIndicator',
+    "setDOM",
+    "setNodeEvent",
+    "selectNode",
+    "clearEvents",
+    "setOptions",
+    "setIndicator",
   ] as const,
   normalizeHistory: (state: EditorState) => {
     /**

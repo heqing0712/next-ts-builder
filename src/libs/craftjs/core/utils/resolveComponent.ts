@@ -1,8 +1,8 @@
-import { ERROR_NOT_IN_RESOLVER } from '@craftjs/utils';
-import React from 'react';
-import invariant from 'tiny-invariant';
+import { ERROR_NOT_IN_RESOLVER } from "@/libs/craftjs/utils";
+import React from "react";
+import invariant from "tiny-invariant";
 
-import { Resolver } from '../interfaces';
+import { Resolver } from "../interfaces";
 
 type ReversedResolver = Map<React.ComponentType | string, string>;
 
@@ -46,7 +46,7 @@ export const resolveComponent = (
   resolver: Resolver,
   comp: React.ElementType | string
 ): string => {
-  if (typeof comp === 'string') {
+  if (typeof comp === "string") {
     return comp;
   }
 
@@ -54,7 +54,7 @@ export const resolveComponent = (
 
   invariant(
     resolvedName,
-    ERROR_NOT_IN_RESOLVER.replace('%node_type%', getComponentName(comp))
+    ERROR_NOT_IN_RESOLVER.replace("%node_type%", getComponentName(comp))
   );
 
   return resolvedName;

@@ -1,8 +1,8 @@
-import { getDOMInfo, ROOT_NODE } from '@craftjs/utils';
+import { getDOMInfo, ROOT_NODE } from "@/libs/craftjs/utils";
 
-import findPosition from './findPosition';
+import findPosition from "./findPosition";
 
-import { EditorStore } from '../editor/store';
+import { EditorStore } from "../editor/store";
 import {
   DragTarget,
   DropPosition,
@@ -11,8 +11,8 @@ import {
   NodeId,
   NodeInfo,
   NodeSelectorWrapper,
-} from '../interfaces';
-import { getNodesFromSelector } from '../utils/getNodesFromSelector';
+} from "../interfaces";
+import { getNodesFromSelector } from "../utils/getNodesFromSelector";
 
 // Hack: to trigger dragend event immediate
 // Otherwise we would have to wait until the native animation is completed before we can actually drop an block
@@ -56,13 +56,13 @@ export class Positioner {
     this.validateDraggedNodes();
 
     this.onScrollListener = this.onScroll.bind(this);
-    window.addEventListener('scroll', this.onScrollListener, true);
-    window.addEventListener('dragover', documentDragoverEventHandler, false);
+    window.addEventListener("scroll", this.onScrollListener, true);
+    window.addEventListener("dragover", documentDragoverEventHandler, false);
   }
 
   cleanup() {
-    window.removeEventListener('scroll', this.onScrollListener, true);
-    window.removeEventListener('dragover', documentDragoverEventHandler, false);
+    window.removeEventListener("scroll", this.onScrollListener, true);
+    window.removeEventListener("dragover", documentDragoverEventHandler, false);
   }
 
   private onScroll(e: Event) {
@@ -85,7 +85,7 @@ export class Positioner {
   }
 
   private getDraggedNodes() {
-    if (this.dragTarget.type === 'new') {
+    if (this.dragTarget.type === "new") {
       return getNodesFromSelector(
         this.store.query.getNodes(),
         this.dragTarget.tree.nodes[this.dragTarget.tree.rootNodeId]
@@ -101,7 +101,7 @@ export class Positioner {
   // Check if the elements being dragged are allowed to be dragged
   private validateDraggedNodes() {
     // We don't need to check for dragTarget.type = "new" because those nodes are not yet in the state (ie: via the .create() connector)
-    if (this.dragTarget.type === 'new') {
+    if (this.dragTarget.type === "new") {
       return;
     }
 
