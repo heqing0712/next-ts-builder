@@ -4,11 +4,10 @@ import { ROOT_NODE } from "@/libs/craftjs/utils";
 import React, { useEffect, useRef, useCallback } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-
 import ArrowUp from "@/assets/icons/arrow-up.svg";
 import Delete from "@/assets/icons/delete.svg";
 import Move from "@/assets/icons/move.svg";
-
+import { useCjEditorStore } from "@/app/craftjs/store/editor";
 const IndicatorDiv = styled.div`
   height: 30px;
   margin-top: -29px;
@@ -36,9 +35,12 @@ const Btn = styled.a`
 
 export const RenderNode = ({ render }) => {
   const { id } = useNode();
-  const { actions, query, isActive } = useEditor((_, query) => ({
+
+  const { actions, query, isActive, isDrag } = useEditor((_, query) => ({
     isActive: query.getEvent("selected").contains(id),
+    isDrag: query.getEvent("draging")?.contains(id),
   }));
+  const { setActiveComponentId } = useCjEditorStore();
 
   const {
     isHover,
@@ -59,11 +61,18 @@ export const RenderNode = ({ render }) => {
   }));
 
   const currentRef = useRef<HTMLDivElement>();
+  // console.log("id:" + id, dom?.classList);
 
   useEffect(() => {
     if (dom) {
-      if (isActive || isHover) dom.classList.add("component-selected");
-      else dom.classList.remove("component-selected");
+      if (isActive || isHover) {
+        dom.classList.add("component-selected");
+
+        setActiveComponentId(id);
+      } else {
+        dom.classList.remove("component-selected");
+        setActiveComponentId("");
+      }
     }
   }, [dom, isActive, isHover]);
 
@@ -89,18 +98,18 @@ export const RenderNode = ({ render }) => {
   useEffect(() => {
     document
       .querySelector(".craftjs-renderer")
-      .addEventListener("scroll", scroll);
+      ?.addEventListener("scroll", scroll);
 
     return () => {
       document
         .querySelector(".craftjs-renderer")
-        .removeEventListener("scroll", scroll);
+        ?.removeEventListener("scroll", scroll);
     };
   }, [scroll]);
 
   return (
     <>
-      {isHover || isActive
+      {(isHover || isActive) && !isDrag
         ? ReactDOM.createPortal(
             <IndicatorDiv
               ref={currentRef}

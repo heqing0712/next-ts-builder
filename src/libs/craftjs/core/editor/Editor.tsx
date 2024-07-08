@@ -5,7 +5,7 @@ import {
 import React, { useEffect, useRef } from "react";
 import invariant from "tiny-invariant";
 
-import { EditorContext } from "./EditorContext";
+import { EditorContext, setEditorContext } from "./EditorContext";
 import { useEditorStore } from "./store";
 
 import { Events } from "../events";
@@ -103,6 +103,8 @@ export const Editor: React.FC<React.PropsWithChildren<Partial<Options>>> = ({
       }
     );
   }, [context]);
+
+  setEditorContext(context);
 
   return context ? (
     <EditorContext.Provider value={context}>

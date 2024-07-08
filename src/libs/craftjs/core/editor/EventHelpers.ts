@@ -1,10 +1,10 @@
-import { EditorState, NodeId, NodeEventTypes } from '../interfaces';
+import { EditorState, NodeId, NodeEventTypes } from "../interfaces";
 
 export function EventHelpers(state: EditorState, eventType: NodeEventTypes) {
   const event = state.events[eventType];
   return {
     contains(id: NodeId) {
-      return event.has(id);
+      return event?.has(id);
     },
     isEmpty() {
       return this.all().length === 0;

@@ -1,9 +1,8 @@
 import React from "react";
-
 import { SectionSettings } from "./SectionSettings";
-
 import { Resizer } from "../Resizer";
-
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useCjEditorStore } from "@/app/craftjs/store/editor";
 export type SectionProps = {
   background: Record<"r" | "g" | "b" | "a", number>;
   color: Record<"r" | "g" | "b" | "a", number>;
@@ -57,6 +56,9 @@ export const Section = (props: Partial<SectionProps>) => {
     radius,
     children,
   } = props;
+
+  const { setShowComponentsPannel } = useCjEditorStore();
+
   return (
     <Resizer
       enable={["top", "bottom"]}
@@ -79,6 +81,15 @@ export const Section = (props: Partial<SectionProps>) => {
       }}
     >
       {children}
+      <div
+        className="btn-add-section"
+        onClick={() => {
+          setShowComponentsPannel(true);
+        }}
+      >
+        <PlusIcon />
+        {/* <span className="btn-add-tit">Add Section</span> */}
+      </div>
     </Resizer>
   );
 };

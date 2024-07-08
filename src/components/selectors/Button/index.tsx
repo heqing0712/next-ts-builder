@@ -2,7 +2,7 @@ import { UserComponent, useNode } from "@/libs/craftjs/core";
 import cx from "classnames";
 import React from "react";
 import styled from "styled-components";
-
+import Draggable from "react-draggable";
 import { ButtonSettings } from "./ButtonSettings";
 
 import { Text } from "../Text";
@@ -39,18 +39,20 @@ export const Button: UserComponent<ButtonProps> = (props: any) => {
 
   const { text, textComponent, color, ...otherProps } = props;
   return (
-    <StyledButton
-      ref={connect}
-      className={cx([
-        "rounded w-full px-4 py-2",
-        {
-          "shadow-lg": props.buttonStyle === "full",
-        },
-      ])}
-      {...otherProps}
-    >
-      <Text {...textComponent} text={text} color={props.color} />
-    </StyledButton>
+    <Draggable>
+      <StyledButton
+        ref={connect}
+        className={cx([
+          "rounded w-full px-4 py-2",
+          {
+            "shadow-lg": props.buttonStyle === "full",
+          },
+        ])}
+        {...otherProps}
+      >
+        <Text {...textComponent} text={text} color={props.color} />
+      </StyledButton>
+    </Draggable>
   );
 };
 

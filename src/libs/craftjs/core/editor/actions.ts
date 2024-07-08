@@ -30,6 +30,7 @@ import {
 import { fromEntries } from "../utils/fromEntries";
 import { getNodesFromSelector } from "../utils/getNodesFromSelector";
 import { removeNodeFromEvents } from "../utils/removeNodeFromEvents";
+import { editorStore } from "@/app/craftjs/store/editor";
 
 const Methods = (
   state: EditorState,
@@ -51,7 +52,8 @@ const Methods = (
   ) => {
     const iterateChildren = (id: NodeId, parentId?: NodeId) => {
       const node = tree.nodes[id];
-      console.log("addNodeTreeToParent", `id:${id},parentId:${parentId}`);
+      //console.log("node", node);
+      //console.log("addNodeTreeToParent", `id:${id},parentId:${parentId}`);
       if (typeof node.data.type !== "string") {
         invariant(
           state.options.resolver[node.data.name],
@@ -206,8 +208,23 @@ const Methods = (
      * @param index
      */
     addNodeTree(tree: NodeTree, parentId?: NodeId, index?: number) {
-      console.log("add node tree");
       addNodeTreeToParent(tree, parentId, { type: "child", index });
+    },
+
+    addx(userElement: React.ReactElement) {
+      const { activeComponentId } = editorStore;
+      if (!activeComponentId) return;
+      const tree = query.parseReactElement(userElement).toNodeTree();
+      console.log(tree);
+      //this.addNodeTree(tree, activeComponentId);
+    },
+
+    addTest(userElement: React.ReactElement) {
+      const { activeComponentId } = editorStore;
+      if (!activeComponentId) return;
+      const tree = query.parseReactElement(userElement).toNodeTree();
+      console.log(tree);
+      this.addNodeTree(tree, activeComponentId);
     },
 
     /**
@@ -316,6 +333,7 @@ const Methods = (
       this.setNodeEvent("selected", null);
       this.setNodeEvent("hovered", null);
       this.setNodeEvent("dragged", null);
+      this.setNodeEvent("draging", null);
       this.setIndicator(null);
     },
 
@@ -340,7 +358,8 @@ const Methods = (
       eventType: NodeEventTypes,
       nodeIdSelector: NodeSelector<NodeSelectorType.Id>
     ) {
-      state.events[eventType].forEach((id) => {
+      console.log("eventType", eventType);
+      state.events[eventType]?.forEach((id) => {
         if (state.nodes[id]) {
           state.nodes[id].events[eventType] = false;
         }

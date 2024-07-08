@@ -28,12 +28,13 @@ export const editorInitialState: EditorState = {
       error: "red",
       success: "rgb(98, 196, 98)",
     },
-    handlers: (store) =>
-      new DefaultEventHandlers({
+    handlers: (store) => {
+      return new DefaultEventHandlers({
         store,
         removeHoverOnMouseleave: false,
         isMultiSelectEnabled: (e: MouseEvent) => !!e.metaKey,
-      }),
+      });
+    },
     normalizeNodes: () => {},
   },
 };
@@ -88,6 +89,12 @@ export type EditorStore = SubscriberAndCallbacksFor<
   typeof QueryMethods
 >;
 
+/**
+ * useEditorStore
+ * @param options
+ * @param patchListener
+ * @returns
+ */
 export const useEditorStore = (
   options: Partial<Options>,
   patchListener: PatchListener<

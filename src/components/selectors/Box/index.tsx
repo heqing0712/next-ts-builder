@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ContainerSettings } from "./ContainerSettings";
+import { BoxSettings } from "./BoxSettings";
 
-import { Resizer } from "../Resizer";
+import { Resizerx } from "../Resizerx";
 
-export type ContainerProps = {
+export type BoxProps = {
   background: Record<"r" | "g" | "b" | "a", number>;
   color: Record<"r" | "g" | "b" | "a", number>;
   flexDirection: string;
@@ -41,7 +41,7 @@ const defaultProps = {
   height: "auto",
 };
 
-export const Container = (props: Partial<ContainerProps>) => {
+export const Box = (props: Partial<BoxProps>) => {
   props = {
     ...defaultProps,
     ...props,
@@ -62,7 +62,7 @@ export const Container = (props: Partial<ContainerProps>) => {
   } = props;
 
   return (
-    <Resizer
+    <Resizerx
       propKey={{ width: "width", height: "height" }}
       inlineFlex
       onResizeFn={(v) => {
@@ -86,17 +86,17 @@ export const Container = (props: Partial<ContainerProps>) => {
       }}
     >
       {children}
-    </Resizer>
+    </Resizerx>
   );
 };
 
-Container.craft = {
-  displayName: "Container",
+Box.craft = {
+  displayName: "Box",
   props: defaultProps,
   rules: {
     canDrag: () => true,
   },
   related: {
-    toolbar: ContainerSettings,
+    toolbar: BoxSettings,
   },
 };

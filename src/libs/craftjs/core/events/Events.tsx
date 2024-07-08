@@ -1,9 +1,9 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo } from "react";
 
-import { EventHandlerContext } from './EventContext';
-import { RenderEditorIndicator } from './RenderEditorIndicator';
+import { EventHandlerContext } from "./EventContext";
+import { RenderEditorIndicator } from "./RenderEditorIndicator";
 
-import { EditorContext } from '../editor/EditorContext';
+import { EditorContext } from "../editor/EditorContext";
 
 type EventsProps = {
   children?: React.ReactNode;
@@ -12,9 +12,10 @@ type EventsProps = {
 export const Events: React.FC<EventsProps> = ({ children }) => {
   const store = useContext(EditorContext);
 
-  const handler = useMemo(() => store.query.getOptions().handlers(store), [
-    store,
-  ]);
+  const handler = useMemo(
+    () => store.query.getOptions().handlers(store),
+    [store]
+  );
 
   if (!handler) {
     return null;

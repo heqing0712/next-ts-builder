@@ -22,7 +22,7 @@ export type UserComponent<T = any> = React.ComponentType<T> & {
 };
 
 export type NodeId = string;
-export type NodeEventTypes = "selected" | "dragged" | "hovered";
+export type NodeEventTypes = "selected" | "dragged" | "hovered" | "draging";
 
 export type Node = {
   id: NodeId;
@@ -55,6 +55,7 @@ export type NodeData = {
   nodes: NodeId[];
   hidden: boolean;
   custom?: any;
+  isDrag: boolean;
   _childCanvas?: Record<string, NodeId>; // TODO: Deprecate in favour of linkedNodes
 };
 

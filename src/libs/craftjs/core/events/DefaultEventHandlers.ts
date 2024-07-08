@@ -1,11 +1,9 @@
 import { isChromium, isLinux } from "@/libs/craftjs/utils";
 import isFunction from "lodash/isFunction";
 import React from "react";
-
 import { CoreEventHandlers, CreateHandlerOptions } from "./CoreEventHandlers";
 import { Positioner } from "./Positioner";
 import { createShadow } from "./createShadow";
-
 import { Indicator, NodeId, DragTarget, NodeTree } from "../interfaces";
 
 export type DefaultEventHandlersOptions = {
@@ -286,15 +284,19 @@ export class DefaultEventHandlers<O = {}> extends CoreEventHandlers<
           (e) => {
             e.craft.stopPropagation();
             let tree;
+
             if (typeof userElement === "function") {
               const result = userElement();
               if (React.isValidElement(result)) {
                 tree = store.query.parseReactElement(result).toNodeTree();
+                console.log("tree1", tree);
               } else {
                 tree = result;
+                console.log("tree2", tree);
               }
             } else {
               tree = store.query.parseReactElement(userElement).toNodeTree();
+              //console.log("tree3", tree);
             }
 
             const dom = e.currentTarget as HTMLElement;
@@ -312,11 +314,13 @@ export class DefaultEventHandlers<O = {}> extends CoreEventHandlers<
               this.options.store,
               this.dragTarget
             );
+            //console.log(this.positioner);
           }
         );
 
         const unbindDragEnd = this.addCraftEventListener(el, "dragend", (e) => {
           e.craft.stopPropagation();
+
           this.dropElement((dragTarget, indicator) => {
             if (dragTarget.type === "existing") {
               return;
@@ -325,6 +329,7 @@ export class DefaultEventHandlers<O = {}> extends CoreEventHandlers<
             const index =
               indicator.placement.index +
               (indicator.placement.where === "after" ? 1 : 0);
+
             store.actions.addNodeTree(
               dragTarget.tree,
               indicator.placement.parent.id,

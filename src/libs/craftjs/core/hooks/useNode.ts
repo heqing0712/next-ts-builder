@@ -16,6 +16,7 @@ export function useNode<S = null>(collect?: (node: Node) => S) {
     actions,
     id,
     related,
+    isDrag: false,
     setProp: (
       cb: (props: Record<string, any>) => void,
       throttleRate?: number

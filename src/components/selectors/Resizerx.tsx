@@ -5,7 +5,7 @@ import { debounce } from "debounce";
 import { Resizable } from "re-resizable";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
-
+import Draggable from "react-draggable";
 import {
   isPercentage,
   pxToPercent,
@@ -82,11 +82,19 @@ const Indicators = styled.div<{ bound?: "row" | "column" }>`
   }
 `;
 
-export const Resizer = (props) => {
+export const Resizerx = (props) => {
   const { propKey, children, flex, inlineFlex } = props;
+  const nodeObj = useNode((node) => ({
+    parent: node.data.parent,
+    active: node.events.selected,
+    nodeWidth: node.data.props[propKey.width],
+    nodeHeight: node.data.props[propKey.height],
+    fillSpace: node.data.props.fillSpace,
+  }));
+
   const {
     id,
-    actions: { setProp },
+    actions: { setProp, setNodeEvent },
     connectors: { connect },
     fillSpace,
     nodeWidth,
@@ -96,13 +104,7 @@ export const Resizer = (props) => {
     x,
     y,
     inNodeContext,
-  } = useNode((node) => ({
-    parent: node.data.parent,
-    active: node.events.selected,
-    nodeWidth: node.data.props[propKey.width],
-    nodeHeight: node.data.props[propKey.height],
-    fillSpace: node.data.props.fillSpace,
-  }));
+  } = nodeObj;
   const [startingPos, setStartingPos] = useState({ x: x, y: y });
   const { isRootNode, parentDirection } = useEditor((state, query) => {
     return {
@@ -219,96 +221,113 @@ export const Resizer = (props) => {
   }, {});
   const _props = { ...props };
   delete _props.propKey;
-  //console.log("inlineFlex", inlineFlex);
+
+  function onStart() {
+    console.log(nodeObj);
+    // 设置为拖拽中
+    setNodeEvent("draging", [id]);
+  }
+  function onStop() {
+    // 清空拖拽中事件
+    setNodeEvent("draging", null);
+  }
+  function onDrag() {}
   return (
-    <Resizable
-      enable={getEnable}
-      className={cx([
-        {
-          "m-auto": isRootNode,
-          flex: flex !== undefined || inlineFlex !== true ? true : flex,
-          "inline-flex": inlineFlex === true,
-        },
-      ])}
-      ref={(ref) => {
-        if (ref) {
-          resizable.current = ref;
-          connect(resizable.current.resizable);
-        }
-      }}
-      size={internalDimensions}
-      onResizeStart={(e) => {
-        updateInternalDimensionsInPx();
-        e.preventDefault();
-        e.stopPropagation();
-        const dom = resizable.current.resizable;
-        if (!dom) return;
-        editingDimensions.current = {
-          width: dom.getBoundingClientRect().width,
-          height: dom.getBoundingClientRect().height,
-        };
-        isResizing.current = true;
-      }}
-      onResize={(_, __, ___, d) => {
-        const dom = resizable.current.resizable;
-        let { width, height }: any = getUpdatedDimensions(d.width, d.height);
-        if (isPercentage(nodeWidth))
-          width =
-            pxToPercent(width, getElementDimensions(dom.parentElement).width) +
-            "%";
-        else width = `${width}px`;
+    <Draggable onStart={onStart} onStop={onStop} onDrag={onDrag}>
+      <Resizable
+        enable={getEnable}
+        className={cx([
+          {
+            "m-auto": isRootNode,
+            flex: flex !== undefined || inlineFlex !== true ? true : flex,
+            "inline-flex": inlineFlex === true,
+          },
+        ])}
+        ref={(ref) => {
+          if (ref) {
+            resizable.current = ref;
+            connect(resizable.current.resizable);
+          }
+        }}
+        size={internalDimensions}
+        onResizeStart={(e) => {
+          updateInternalDimensionsInPx();
+          e.preventDefault();
+          e.stopPropagation();
+          const dom = resizable.current.resizable;
+          if (!dom) return;
+          editingDimensions.current = {
+            width: dom.getBoundingClientRect().width,
+            height: dom.getBoundingClientRect().height,
+          };
+          isResizing.current = true;
+        }}
+        onResize={(_, __, ___, d) => {
+          const dom = resizable.current.resizable;
+          let { width, height }: any = getUpdatedDimensions(d.width, d.height);
+          if (isPercentage(nodeWidth))
+            width =
+              pxToPercent(
+                width,
+                getElementDimensions(dom.parentElement).width
+              ) + "%";
+          else width = `${width}px`;
 
-        if (isPercentage(nodeHeight))
-          height =
-            pxToPercent(
-              height,
-              getElementDimensions(dom.parentElement).height
-            ) + "%";
-        else height = `${height}px`;
+          if (isPercentage(nodeHeight))
+            height =
+              pxToPercent(
+                height,
+                getElementDimensions(dom.parentElement).height
+              ) + "%";
+          else height = `${height}px`;
 
-        if (isPercentage(width) && dom.parentElement.style.width === "auto") {
-          width = editingDimensions.current.width + d.width + "px";
-        }
+          if (isPercentage(width) && dom.parentElement.style.width === "auto") {
+            width = editingDimensions.current.width + d.width + "px";
+          }
 
-        if (isPercentage(height) && dom.parentElement.style.height === "auto") {
-          height = editingDimensions.current.height + d.height + "px";
-        }
+          if (
+            isPercentage(height) &&
+            dom.parentElement.style.height === "auto"
+          ) {
+            height = editingDimensions.current.height + d.height + "px";
+          }
 
-        setProp((prop: any) => {
-          prop[propKey.width] = width;
-          prop[propKey.height] = height;
-        }, 500);
-        console.log({
-          width,
-          height,
-        });
+          setProp((prop: any) => {
+            prop[propKey.width] = width;
+            prop[propKey.height] = height;
+          }, 500);
+          console.log({
+            width,
+            height,
+          });
 
-        props?.onResizeFn?.({
-          width,
-          height,
-        });
-      }}
-      onResizeStop={() => {
-        isResizing.current = false;
-        updateInternalDimensionsWithOriginal();
-      }}
-      {..._props}
-    >
-      {children}
-      {active && !isNoFourHorn && (
-        <Indicators bound={fillSpace === "yes" ? parentDirection : false}>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </Indicators>
-      )}
+          props?.onResizeFn?.({
+            width,
+            height,
+          });
+        }}
+        onResizeStop={() => {
+          isResizing.current = false;
+          updateInternalDimensionsWithOriginal();
+        }}
+        {..._props}
+      >
+        {children}
+        {active && !isNoFourHorn && (
+          <Indicators bound={fillSpace === "yes" ? parentDirection : false}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </Indicators>
+        )}
 
-      {active && isNoFourHorn && (
-        <Indicators
-          bound={fillSpace === "yes" ? parentDirection : false}
-        ></Indicators>
-      )}
-    </Resizable>
+        {active && isNoFourHorn && (
+          <Indicators
+            bound={fillSpace === "yes" ? parentDirection : false}
+          ></Indicators>
+        )}
+      </Resizable>
+    </Draggable>
   );
 };

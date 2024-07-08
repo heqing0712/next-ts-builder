@@ -36,6 +36,7 @@ export function useInternalNode<S = null>(collect?: (node: Node) => S) {
 
   const actions = useMemo(() => {
     return {
+      setNodeEvent: EditorActions.setNodeEvent,
       setProp: (cb: any, throttleRate?: number) => {
         if (throttleRate) {
           EditorActions.history.throttle(throttleRate).setProp(id, cb);
