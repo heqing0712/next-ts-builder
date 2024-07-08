@@ -1,0 +1,45 @@
+.setting-container{
+    width:300px;
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    height:100%;
+    border-left:1px solid #ddd;
+    padding: 0px 15px 15px;
+
+}
+.s-brick{
+  padding:10px 0;
+ border-bottom:1px solid #ddd;
+  .brick-tit{
+     padding:10px 0;
+     font-size:12px;
+  }
+}
+.brick-align{
+    display: flex;
+    justify-content: space-between;
+
+    .align-item{
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      height: 60px;
+    }
+}
+.brick-position{
+.form-item{
+  display: flex;
+  .item-tit{
+    padding:0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:12px;
+  }
+  .item-val{
+
+  }
+}
+}
