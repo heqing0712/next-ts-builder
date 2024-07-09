@@ -19,17 +19,15 @@ export default function Postion() {
             <div className="item-tit">Type</div>
             <div className="item-val">
               <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a fruit" />
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a Position" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                    <SelectItem value="absolute">Absolute</SelectItem>
+                    <SelectItem value="relative">Relative</SelectItem>
+                    <SelectItem value="fixed">fixed</SelectItem>
+                    <SelectItem value="sticky">sticky</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
