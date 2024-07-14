@@ -12,6 +12,21 @@
 .s-brick{
   padding:15px 0;
  border-bottom:1px solid #ddd;
+ .brick-hd{
+  display: flex;
+  justify-content: space-between;
+  .brick-tit{
+    padding:0 0 0 0;
+ }
+  .brick-act{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+  }
+ }
+
   .brick-tit{
      padding:0 0 10px 0;
      font-size:12px;
@@ -25,7 +40,7 @@
       align-items: center;
 
       font-size:12px;
-      width:60px;
+      width:80px;
       text-align: left;
     }
     .item-val{
@@ -45,3 +60,15 @@
     }
 }
  
+.form-item-gap{
+
+  .item-vals{
+    display: flex;
+    justify-content: space-between;
+  }
+  .item-val{
+    display:flex;
+    align-items:center;
+    margin:0 5px;
+  }
+}

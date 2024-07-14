@@ -10,6 +10,11 @@ import AlignTopIcon from "@/assets/icons/alignTop.svg";
 import AlignVerticallyIcon from "@/assets/icons/alignVertically.svg";
 import DistributeHorizontallyIcon from "@/assets/icons/distributeHorizontally.svg";
 import DistributeVerticallyIcon from "@/assets/icons/distributeVertically.svg";
+import ArrowHorizontalIcon from "@/assets/icons/arrow-horizontal.svg";
+import ArrowVerticalIcon from "@/assets/icons/arrow-vertical.svg";
+import AlignStartIcon from "@/assets/icons/alignStart.svg";
+import AlignCenterIcon from "@/assets/icons/alignCenter.svg";
+import AlignEndIcon from "@/assets/icons/alignEnd.svg";
 
 export {
   ArrowUp,
@@ -23,4 +28,9 @@ export {
   AlignVerticallyIcon,
   DistributeHorizontallyIcon,
   DistributeVerticallyIcon,
+  ArrowHorizontalIcon,
+  ArrowVerticalIcon,
+  AlignStartIcon,
+  AlignCenterIcon,
+  AlignEndIcon,
 };
