@@ -15,8 +15,11 @@ import ArrowVerticalIcon from "@/assets/icons/arrow-vertical.svg";
 import AlignStartIcon from "@/assets/icons/alignStart.svg";
 import AlignCenterIcon from "@/assets/icons/alignCenter.svg";
 import AlignEndIcon from "@/assets/icons/alignEnd.svg";
-
+import CloseIcon from "@/assets/icons/close.svg";
+import StarIcon from "@/assets/icons/star.svg";
 export {
+  StarIcon,
+  CloseIcon,
   ArrowUp,
   Delete,
   Move,

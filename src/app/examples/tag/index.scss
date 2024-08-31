@@ -1,0 +1,52 @@
+.tag-container{
+    padding:20px;
+    
+    .bx-tag{
+        height:20px;
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--builder-tag-bg-color);
+        height: 30px;
+        min-height: 30px;
+        border-radius: 8px;
+        border:1px solid transparent;
+        &:active{
+            border:1px solid hsl(var(--primary));
+        }
+        .tag-main{
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size:12px;
+            flex:1;
+        }
+        .tag-icon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background-color: hsl(var(--primary));
+            color:#fff;
+            margin-right: 8px;
+            margin-left: 3px;
+            flex-shrink: 0;
+        }
+        .tag-close{
+            width: 28px;
+            height: 30px;
+            flex-shrink: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          
+        
+            
+        }
+    
+    }
+}
